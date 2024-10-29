@@ -1,6 +1,6 @@
 # Teste ECatalogos
 
-### Rodando Docker
+### Rodando com Docker
 
 <details>
   <summary><b>Requisitos:</b></summary><br>
@@ -51,3 +51,9 @@ http://localhost:3000/
 </details>
 
 </details>
+
+## Autor
+
+Linkedin - [Hiago Briano](https://www.linkedin.com/in/hiago-briano/)
+
+Email - hiago.artist@hotmail.com

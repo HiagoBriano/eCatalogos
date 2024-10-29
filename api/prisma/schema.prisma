@@ -21,6 +21,7 @@ model Product {
     subcategory    String?   @db.VarChar(50)
     promptDelivery Boolean   @map("prompt_delivey")
     companyId      Int?      @map("company_id")
+    company        Company?  @relation(fields: [companyId], references: [id])
     idErp          String?   @map("id_erp") @db.VarChar(80)
     brandId        Int?      @map("brand_id")
     brandRelation  Brand?    @relation(fields: [brandId], references: [id])
@@ -28,13 +29,11 @@ model Product {
     variantId      Int?      @map("variant_id")
     createdAt      DateTime  @default(now()) @map("created_at")
     updatedAt      DateTime? @updatedAt @map("updated_at")
-    deleted        Boolean?
+    deleted        Boolean?  @default(false)
 
     colors Color[]
     images Image[]
     skus   Sku[]
-
-    company Company? @relation(fields: [companyId], references: [id])
 
     @@map("products")
 }
@@ -74,7 +73,7 @@ model Brand {
     minInstallmentsValue Float?    @map("min_installments_value")
     orderSkus            String?   @map("order_skus") @db.VarChar(100)
     visible              Boolean?
-    deleted              Boolean?
+    deleted              Boolean?  @default(false)
     cnpj                 String?   @db.VarChar(14)
     createdAt            DateTime  @default(now()) @map("created_at")
     updatedAt            DateTime? @map("updated_at")
@@ -96,7 +95,7 @@ model Company {
     apiKey    String    @map("api_key") @db.VarChar(45)
     createdAt DateTime  @default(now()) @map("created_at")
     updatedAt DateTime? @updatedAt @map("updated_at")
-    deleted   Boolean?
+    deleted   Boolean?  @default(false)
 
     products Product[]
     brands   Brand[]
@@ -111,7 +110,7 @@ model Sku {
     productId   Int       @map("product_id")
     product     Product   @relation(fields: [productId], references: [id])
     minQuantity Int       @map("min_quantity")
-    deleted     Boolean?
+    deleted     Boolean?  @default(false)
     openGrid    Boolean   @map("open_grid")
     idErp       String?   @db.VarChar(50)
     createdAt   DateTime  @default(now()) @map("created_at")
