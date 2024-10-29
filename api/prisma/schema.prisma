@@ -1,0 +1,121 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model Product {
+    id             Int       @id @default(autoincrement())
+    name           String    @db.VarChar(255)
+    reference      String    @db.VarChar(30)
+    price          Int?
+    category       String?   @db.VarChar(50)
+    description    String?   @db.VarChar(8000)
+    brand          String?   @db.VarChar(100)
+    gender         String?   @db.VarChar(50)
+    stock          Int?
+    type           String?   @db.VarChar(255)
+    subcategory    String?   @db.VarChar(50)
+    promptDelivery Boolean   @map("prompt_delivey")
+    companyId      Int?      @map("company_id")
+    idErp          String?   @map("id_erp") @db.VarChar(80)
+    brandId        Int?      @map("brand_id")
+    brandRelation  Brand?    @relation(fields: [brandId], references: [id])
+    deadlineId     Int?      @map("deadline_id")
+    variantId      Int?      @map("variant_id")
+    createdAt      DateTime  @default(now()) @map("created_at")
+    updatedAt      DateTime? @updatedAt @map("updated_at")
+    deleted        Boolean?
+
+    colors Color[]
+    images Image[]
+    skus   Sku[]
+
+    company Company? @relation(fields: [companyId], references: [id])
+
+    @@map("products")
+}
+
+model Color {
+    id        Int       @id @default(autoincrement())
+    name      String    @db.VarChar(50)
+    rgb       String?   @db.VarChar(11)
+    hexCode   String?   @map("hex_code") @db.VarChar(10)
+    productId Int       @map("product_id")
+    product   Product   @relation(fields: [productId], references: [id])
+    createdAt DateTime  @default(now()) @map("created_a")
+    updatedAt DateTime? @updatedAt @map("updated_at")
+
+    @@map("colors")
+}
+
+model Image {
+    id         Int       @id @default(autoincrement())
+    path       String    @db.VarChar(255)
+    order      Int       @db.TinyInt
+    productId  Int       @map("product_id")
+    product    Product   @relation(fields: [productId], references: [id])
+    companyKey String?   @db.VarChar(4)
+    createdAt  DateTime  @default(now()) @map("created_at")
+    updatedAt  DateTime? @updatedAt @map("updated_at")
+
+    @@map("images")
+}
+
+model Brand {
+    id                   Int       @id @default(autoincrement())
+    name                 String    @db.VarChar(45)
+    companyId            Int       @map("company_id")
+    company              Company   @relation(fields: [companyId], references: [id])
+    minValue             Float?    @map("min_value")
+    minInstallmentsValue Float?    @map("min_installments_value")
+    orderSkus            String?   @map("order_skus") @db.VarChar(100)
+    visible              Boolean?
+    deleted              Boolean?
+    cnpj                 String?   @db.VarChar(14)
+    createdAt            DateTime  @default(now()) @map("created_at")
+    updatedAt            DateTime? @map("updated_at")
+    deletedAt            DateTime? @map("deleted_at")
+
+    products Product[]
+
+    @@map("brands")
+}
+
+model Company {
+    id        Int       @id @default(autoincrement())
+    name      String    @db.VarChar(100)
+    mail      String?
+    cnpj      String?   @db.VarChar(14)
+    key       Int
+    login     String    @db.VarChar(150)
+    pass      String    @db.VarChar(200)
+    apiKey    String    @map("api_key") @db.VarChar(45)
+    createdAt DateTime  @default(now()) @map("created_at")
+    updatedAt DateTime? @updatedAt @map("updated_at")
+    deleted   Boolean?
+
+    products Product[]
+    brands   Brand[]
+
+    @@map("companies")
+}
+
+model Sku {
+    id          Int       @id @default(autoincrement())
+    size        String    @db.VarChar(10)
+    stock       BigInt
+    productId   Int       @map("product_id")
+    product     Product   @relation(fields: [productId], references: [id])
+    minQuantity Int       @map("min_quantity")
+    deleted     Boolean?
+    openGrid    Boolean   @map("open_grid")
+    idErp       String?   @db.VarChar(50)
+    createdAt   DateTime  @default(now()) @map("created_at")
+    updatedAt   DateTime? @map("updated_at")
+
+    @@map("skus")
+}
