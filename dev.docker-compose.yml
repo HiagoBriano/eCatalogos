@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: eCatalogos-db
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: eCatalogos
+      MYSQL_DATABASE: eCatalogos
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_dev_data:/var/lib/mysql
+
+  api:
+    container_name: eCatalogos-api
+    build: ./api
+    environment:
+      - PORT=3001
+      - DATABASE_URL=mysql://root:eCatalogos@db:3306/eCatalogos
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    working_dir: /app
+    command: npm run dev
+
+volumes:
+  db_dev_data:
