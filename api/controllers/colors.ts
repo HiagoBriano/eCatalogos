@@ -6,12 +6,14 @@ async function FindAll(_req: Request, res: Response) {
   const response = await ColorsModel.FindAll();
 
   if (!response.success) {
-    return res
+    res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
+    return;
   }
 
-  return res.status(200).json({ message: null, ...response });
+  res.status(200).json({ message: null, ...response });
+  return;
 }
 
 async function FindUnique(req: Request, res: Response) {
@@ -20,12 +22,14 @@ async function FindUnique(req: Request, res: Response) {
   const response = await ColorsModel.FindUnique(id);
 
   if (!response.success) {
-    return res
+    res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
+    return;
   }
 
-  return res.status(200).json({ message: null, ...response });
+  res.status(200).json({ message: null, ...response });
+  return;
 }
 
 async function Create(req: Request, res: Response) {
@@ -34,12 +38,14 @@ async function Create(req: Request, res: Response) {
   const response = await ColorsModel.Create(data);
 
   if (!response.success) {
-    return res
+    res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
+    return;
   }
 
-  return res.status(201).json({ message: null, ...response });
+  res.status(201).json({ message: null, ...response });
+  return;
 }
 
 async function Update(req: Request, res: Response) {
@@ -50,26 +56,28 @@ async function Update(req: Request, res: Response) {
   const checkIfExists = await ColorsModel.FindUnique(id);
 
   if (!checkIfExists.success) {
-    return res
+    res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
+    return;
   }
 
   if (!checkIfExists.data) {
-    return res
-      .status(404)
-      .json({ success: false, message: "Not found", data: null });
+    res.status(404).json({ success: false, message: "Not found", data: null });
+    return;
   }
 
   const response = await ColorsModel.Update(id, data);
 
   if (!response.success) {
-    return res
+    res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
+    return;
   }
 
-  return res.status(200).json({ message: null, ...response });
+  res.status(200).json({ message: null, ...response });
+  return;
 }
 
 async function Delete(req: Request, res: Response) {
@@ -78,26 +86,28 @@ async function Delete(req: Request, res: Response) {
   const checkIfExists = await ColorsModel.FindUnique(id);
 
   if (!checkIfExists.success) {
-    return res
+    res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
+    return;
   }
 
   if (!checkIfExists.data) {
-    return res
-      .status(404)
-      .json({ success: false, message: "Not found", data: null });
+    res.status(404).json({ success: false, message: "Not found", data: null });
+    return;
   }
 
   const response = await ColorsModel.Delete(id);
 
   if (!response.success) {
-    return res
+    res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
+    return;
   }
 
-  return res.status(200).json({ success: false, message: null, data: null });
+  res.status(200).json({ success: false, message: null, data: null });
+  return;
 }
 
 const ColorsController = {
