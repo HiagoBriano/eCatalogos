@@ -1,116 +1,106 @@
-import { CreateBrandDTO, UpdateBrandDTO } from "../interface/brands";
+import { CreateSkuDTO, UpdateSkuDTO } from "../interface/skus";
 import { Request, Response } from "express";
-import BrandsModel from "../models/brands";
+import SkusModel from "../models/skus";
 
 async function FindAll(_req: Request, res: Response) {
-  const response = await BrandsModel.FindAll();
+  const response = await SkusModel.FindAll();
 
   if (!response.success) {
-    res
+    return res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
-    return;
   }
 
-  res.status(200).json({ message: null, ...response });
-  return;
+  return res.status(200).json({ message: null, ...response });
 }
 
 async function FindUnique(req: Request, res: Response) {
   const id = Number(req.params.id);
 
-  const response = await BrandsModel.FindUnique(id);
+  const response = await SkusModel.FindUnique(id);
 
   if (!response.success) {
-    res
+    return res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
-    return;
   }
 
-  res.status(200).json({ message: null, ...response });
-  return;
+  return res.status(200).json({ message: null, ...response });
 }
 
 async function Create(req: Request, res: Response) {
-  const data: CreateBrandDTO = req.body;
+  const data: CreateSkuDTO = req.body;
 
-  const response = await BrandsModel.Create(data);
+  const response = await SkusModel.Create(data);
 
   if (!response.success) {
-    res
+    return res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
-    return;
   }
 
-  res.status(201).json({ message: null, ...response });
-  return;
+  return res.status(201).json({ message: null, ...response });
 }
 
 async function Update(req: Request, res: Response) {
-  const data: UpdateBrandDTO = req.body;
+  const data: UpdateSkuDTO = req.body;
 
   const id = Number(req.params.id);
 
-  const checkIfExists = await BrandsModel.FindUnique(id);
+  const checkIfExists = await SkusModel.FindUnique(id);
 
   if (!checkIfExists.success) {
-    res
+    return res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
-    return;
   }
 
   if (!checkIfExists.data) {
-    res.status(404).json({ success: false, message: "Not found", data: null });
-    return;
+    return res
+      .status(404)
+      .json({ success: false, message: "Not found", data: null });
   }
 
-  const response = await BrandsModel.Update(id, data);
+  const response = await SkusModel.Update(id, data);
 
   if (!response.success) {
-    res
+    return res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
-    return;
   }
 
-  res.status(200).json({ message: null, ...response });
-  return;
+  return res.status(200).json({ message: null, ...response });
 }
 
 async function Delete(req: Request, res: Response) {
   const id = Number(req.params.id);
 
-  const checkIfExists = await BrandsModel.FindUnique(id);
+  const checkIfExists = await SkusModel.FindUnique(id);
 
   if (!checkIfExists.success) {
-    res
+    return res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
-    return;
   }
 
   if (!checkIfExists.data) {
-    res.status(404).json({ success: false, message: "Not found", data: null });
-    return;
+    return res
+      .status(404)
+      .json({ success: false, message: "Not found", data: null });
   }
 
-  const response = await BrandsModel.Delete(id);
+  const response = await SkusModel.Delete(id);
 
   if (!response.success) {
-    res
+    return res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
-    return;
   }
 
-  res.status(200).json({ success: false, message: null, data: null });
-  return;
+  return res.status(200).json({ success: false, message: null, data: null });
 }
 
-const BrandsController = {
+const SkusController = {
   FindAll,
   FindUnique,
   Create,
@@ -118,4 +108,4 @@ const BrandsController = {
   Delete,
 };
 
-export default BrandsController;
+export default SkusController;

@@ -1,116 +1,106 @@
-import { CreateBrandDTO, UpdateBrandDTO } from "../interface/brands";
+import { CreateProductDTO, UpdateProductDTO } from "../interface/products";
+import ProductsModel from "../models/products";
 import { Request, Response } from "express";
-import BrandsModel from "../models/brands";
 
 async function FindAll(_req: Request, res: Response) {
-  const response = await BrandsModel.FindAll();
+  const response = await ProductsModel.FindAll();
 
   if (!response.success) {
-    res
+    return res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
-    return;
   }
 
-  res.status(200).json({ message: null, ...response });
-  return;
+  return res.status(200).json({ message: null, ...response });
 }
 
 async function FindUnique(req: Request, res: Response) {
   const id = Number(req.params.id);
 
-  const response = await BrandsModel.FindUnique(id);
+  const response = await ProductsModel.FindUnique(id);
 
   if (!response.success) {
-    res
+    return res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
-    return;
   }
 
-  res.status(200).json({ message: null, ...response });
-  return;
+  return res.status(200).json({ message: null, ...response });
 }
 
 async function Create(req: Request, res: Response) {
-  const data: CreateBrandDTO = req.body;
+  const data: CreateProductDTO = req.body;
 
-  const response = await BrandsModel.Create(data);
+  const response = await ProductsModel.Create(data);
 
   if (!response.success) {
-    res
+    return res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
-    return;
   }
 
-  res.status(201).json({ message: null, ...response });
-  return;
+  return res.status(201).json({ message: null, ...response });
 }
 
 async function Update(req: Request, res: Response) {
-  const data: UpdateBrandDTO = req.body;
+  const data: UpdateProductDTO = req.body;
 
   const id = Number(req.params.id);
 
-  const checkIfExists = await BrandsModel.FindUnique(id);
+  const checkIfExists = await ProductsModel.FindUnique(id);
 
   if (!checkIfExists.success) {
-    res
+    return res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
-    return;
   }
 
   if (!checkIfExists.data) {
-    res.status(404).json({ success: false, message: "Not found", data: null });
-    return;
+    return res
+      .status(404)
+      .json({ success: false, message: "Not found", data: null });
   }
 
-  const response = await BrandsModel.Update(id, data);
+  const response = await ProductsModel.Update(id, data);
 
   if (!response.success) {
-    res
+    return res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
-    return;
   }
 
-  res.status(200).json({ message: null, ...response });
-  return;
+  return res.status(200).json({ message: null, ...response });
 }
 
 async function Delete(req: Request, res: Response) {
   const id = Number(req.params.id);
 
-  const checkIfExists = await BrandsModel.FindUnique(id);
+  const checkIfExists = await ProductsModel.FindUnique(id);
 
   if (!checkIfExists.success) {
-    res
+    return res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
-    return;
   }
 
   if (!checkIfExists.data) {
-    res.status(404).json({ success: false, message: "Not found", data: null });
-    return;
+    return res
+      .status(404)
+      .json({ success: false, message: "Not found", data: null });
   }
 
-  const response = await BrandsModel.Delete(id);
+  const response = await ProductsModel.Delete(id);
 
   if (!response.success) {
-    res
+    return res
       .status(500)
       .json({ success: false, message: "Internal server error", data: null });
-    return;
   }
 
-  res.status(200).json({ success: false, message: null, data: null });
-  return;
+  return res.status(200).json({ success: false, message: null, data: null });
 }
 
-const BrandsController = {
+const ProductsController = {
   FindAll,
   FindUnique,
   Create,
@@ -118,4 +108,4 @@ const BrandsController = {
   Delete,
 };
 
-export default BrandsController;
+export default ProductsController;
