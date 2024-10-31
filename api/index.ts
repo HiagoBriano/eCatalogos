@@ -7,6 +7,7 @@ import SkusRouters from "./routers/skus";
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
+import Seed from "./seed";
 
 const app = express();
 app.use(express.json());
@@ -22,6 +23,10 @@ app.use("/sku", SkusRouters);
 app.get("/", (_req, res) => {
   res.status(200).json({ status: "active" });
 });
+
+if (process.env.DOCKER === "YES") {
+  await Seed();
+}
 
 const port = process.env.PORT ? parseInt(process.env.PORT) : 3001;
 app.listen(port, () => console.log(`Server is running on port ${port}`));

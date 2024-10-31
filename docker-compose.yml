@@ -12,6 +12,12 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -peCatalogos"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
   api:
     container_name: eCatalogos-api
@@ -19,11 +25,13 @@ services:
     environment:
       - PORT=3001
       - DATABASE_URL=mysql://root:eCatalogos@db:3306/eCatalogos
+      - DOCKER=YES
     ports:
       - "3001:3001"
     depends_on:
-      - db
-    command: npm run start
+      db:
+        condition: service_healthy
+    command: sh -c "npx prisma migrate dev && npm start"
 
 volumes:
   db_data:
