@@ -7,8 +7,8 @@ import SkusSeed from "./skus";
 
 export default async function Seed() {
   await CompaniesSeed();
-  await BrandsSeed();
   await ProductsSeed();
+  await BrandsSeed();
   await ColorsSeed();
   await ImagesSeed();
   await SkusSeed();

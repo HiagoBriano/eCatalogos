@@ -5,9 +5,9 @@ import ColorsRouters from "./routers/colors";
 import ImagesRouters from "./routers/images";
 import SkusRouters from "./routers/skus";
 import express from "express";
+import Seed from "./seed";
 import cors from "cors";
 import "dotenv/config";
-import Seed from "./seed";
 
 const app = express();
 app.use(express.json());
