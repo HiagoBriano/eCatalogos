@@ -1,5 +1,9 @@
 # Teste ECatalogos
 
+### Estrutura do banco de dados
+
+<img height="400em" src="./db-image.png" align="center" />
+
 ### Rodando com Docker
 
 <details>
@@ -51,6 +55,16 @@ http://localhost:3000/
 </details>
 
 </details>
+
+### Populando o banco de dados
+
+Para popular o banco de dados execute o comando abaixo no terminal
+
+```
+npm run seed
+```
+
+- Precisa estar na pasta `API`
 
 ## Autor
 

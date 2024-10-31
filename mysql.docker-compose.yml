@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:latest
+    container_name: eCatalogos-api
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: eCatalogos # Altere para uma senha forte
+      MYSQL_DATABASE: eCatalogos # Nome do banco de dados padrão
+      MYSQL_USER: my_user # Nome do usuário
+      MYSQL_PASSWORD: eCatalogos # Altere para uma senha forte
+    ports:
+      - "3306:3306" # Mapeia a porta 3306 do contêiner para a porta 3306 da máquina local
+    volumes:
+      - mysql_data:/var/lib/mysql # Persistência dos dados
+
+volumes:
+  mysql_data:

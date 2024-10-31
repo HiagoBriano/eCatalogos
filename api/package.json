@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "start": "node --loader ts-node/esm index.ts",
-    "dev": "nodemon --exec node --loader ts-node/esm index.ts",
-    "build": "tsc"
+    "dev": "nodemon --exec ts-node index.ts",
+    "build": "tsc",
+    "seed": "ts-node seed/index.ts"
   },
   "author": "",
   "license": "ISC",
@@ -17,11 +18,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "nodemon": "^3.1.7",
-    "prisma": "^5.21.1",
-    "ts-node": "^10.9.2"
+    "prisma": "^5.21.1"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0"
+    "@types/express": "^5.0.0",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2"
   }
 }
