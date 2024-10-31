@@ -40,7 +40,7 @@ const allData = [
 
 export default async function ColorsSeed() {
   try {
-    const datas = allData.map((data) => ({
+    const data = allData.map((data) => ({
       id: data[0] as number,
       name: data[1] as string,
       rgb: data[2] as string | null,
@@ -50,11 +50,9 @@ export default async function ColorsSeed() {
       updatedAt: data[6] === null ? null : new Date(data[6] as string),
     }));
 
-    for (const current of datas) {
-      await prismaClient.color.create({
-        data: current,
-      });
-    }
+    await prismaClient.color.createMany({
+      data,
+    });
 
     console.log("success - colors");
   } catch (error) {

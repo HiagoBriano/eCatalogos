@@ -2403,7 +2403,7 @@ const allData = [
 
 export default async function ProductsSeed() {
   try {
-    const datas = allData.map((data) => ({
+    const data = allData.map((data) => ({
       id: data[0] as number,
       name: data[1] as string,
       reference: data[2] as string,
@@ -2415,11 +2415,9 @@ export default async function ProductsSeed() {
       deleted: data[18] === 1 ? true : false,
     }));
 
-    for (const current of datas) {
-      await prismaClient.product.create({
-        data: current,
-      });
-    }
+    await prismaClient.product.createMany({
+      data,
+    });
 
     console.log("success - product");
   } catch (error) {

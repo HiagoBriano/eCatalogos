@@ -2,7 +2,7 @@ import prismaClient from "../models/prismaClient";
 
 export default async function BrandsSeed() {
   try {
-    const datas = [
+    const data = [
       {
         id: 11,
         name: "Marca Moda",
@@ -117,11 +117,9 @@ export default async function BrandsSeed() {
       },
     ];
 
-    for (const current of datas) {
-      await prismaClient.brand.create({
-        data: current,
-      });
-    }
+    await prismaClient.brand.createMany({
+      data,
+    });
 
     console.log("success - brands");
   } catch (error) {

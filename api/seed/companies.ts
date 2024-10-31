@@ -2,7 +2,7 @@ import prismaClient from "../models/prismaClient";
 
 export default async function CompaniesSeed() {
   try {
-    const datas = [
+    const data = [
       {
         id: 31,
         name: "Inovações Luminar",
@@ -16,11 +16,9 @@ export default async function CompaniesSeed() {
       },
     ];
 
-    for (const current of datas) {
-      await prismaClient.company.create({
-        data: current,
-      });
-    }
+    await prismaClient.company.createMany({
+      data,
+    });
 
     console.log("success - companies");
   } catch (error) {

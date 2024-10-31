@@ -1675,11 +1675,7 @@ const allData = [
 
 export default async function ImagesSeed() {
   try {
-    // allData.forEach((data) => {
-    //   console.log(data[5]);
-    // });
-
-    const datas = allData.map((data) => ({
+    const data = allData.map((data) => ({
       id: data[0] as number,
       path: data[1] as string,
       order: data[2] as number,
@@ -1689,11 +1685,9 @@ export default async function ImagesSeed() {
       updatedAt: data[6] === null ? null : new Date(data[6] as string),
     }));
 
-    for (const current of datas) {
-      await prismaClient.image.create({
-        data: current,
-      });
-    }
+    await prismaClient.image.createMany({
+      data,
+    });
 
     console.log("success - images");
   } catch (error) {

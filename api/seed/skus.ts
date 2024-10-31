@@ -369,7 +369,7 @@ const allData = [
 
 export default async function SkusSeed() {
   try {
-    const datas = allData.map((data) => ({
+    const data = allData.map((data) => ({
       id: data[0] as number,
       size: data[1] as string,
       stock: data[4] as number,
@@ -380,11 +380,9 @@ export default async function SkusSeed() {
       updatedAt: data[8] === null ? null : new Date(data[6] as string),
     }));
 
-    for (const current of datas) {
-      await prismaClient.sku.create({
-        data: current,
-      });
-    }
+    await prismaClient.sku.createMany({
+      data,
+    });
 
     console.log("success - Skus");
   } catch (error) {
