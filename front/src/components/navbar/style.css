@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.Navbar--top {
+  background-color: #809caa;
+  width: 100vw;
+  height: 43px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Navbar--top > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 8px 20px;
+}
+
+.Navbar--center {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.Navbar--center > p {
+  color: rgb(128, 156, 170);
+  text-align: center;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  padding: 3px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  background: rgb(253, 255, 253);
+  margin: auto;
+}
+
+.Navbar--right {
+  color: rgb(128, 156, 170);
+  font-size: 14px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 100px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-family: Poppins;
+}
