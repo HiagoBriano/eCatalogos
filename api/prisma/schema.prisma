@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-    provider = "mysql"
+    provider = "postgresql"
     url      = env("DATABASE_URL")
 }
 
@@ -54,7 +54,7 @@ model Color {
 model Image {
     id         Int       @id @default(autoincrement())
     path       String    @db.VarChar(255)
-    order      Int       @db.TinyInt
+    order      Int
     productId  Int       @map("product_id")
     product    Product   @relation(fields: [productId], references: [id])
     companyKey String?   @db.VarChar(4)
