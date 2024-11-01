@@ -32,6 +32,24 @@ services:
       db:
         condition: service_healthy
     command: sh -c "npx prisma migrate dev && npm start"
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3001"]
+      timeout: 10s
+      retries: 5
+
+  app:
+    container_name: eCatalogos-app
+    build: ./app
+    environment:
+      - REACT_APP_BACKEND_HOSTNAME=localhost
+      - REACT_APP_BACKEND_PORT=3001
+    ports:
+      - 3000:3000
+    command: npm start
+    restart: on-failure
+    depends_on:
+      api:
+        condition: service_started
 
 volumes:
   db_data:
