@@ -106,7 +106,7 @@ model Company {
 model Sku {
     id          Int       @id @default(autoincrement())
     size        String    @db.VarChar(10)
-    stock       BigInt
+    stock       Int
     productId   Int       @map("product_id")
     product     Product   @relation(fields: [productId], references: [id])
     minQuantity Int       @map("min_quantity")

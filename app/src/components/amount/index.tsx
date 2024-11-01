@@ -1,33 +1,38 @@
 import React from 'react';
 import './style.css';
+import { ISku } from '../../service/interface';
 
-export default function Amount() {
-  const all = [
-    {
-      size: 'G',
-      amount: 2,
-    },
-    {
-      size: 'GG',
-      amount: 4,
-    },
-    {
-      size: 'M',
-      amount: 1,
-    },
-    {
-      size: 'P',
-      amount: 5,
-    },
-  ];
+interface Props {
+  skus: ISku[];
+}
+
+export default function Amount({ skus }: Props) {
+  // const all = [
+  //   {
+  //     size: 'G',
+  //     amount: 2,
+  //   },
+  //   {
+  //     size: 'GG',
+  //     amount: 4,
+  //   },
+  //   {
+  //     size: 'M',
+  //     amount: 1,
+  //   },
+  //   {
+  //     size: 'P',
+  //     amount: 5,
+  //   },
+  // ];
 
   return (
     <div className="Amount--top">
       <div>
-        {all.map((item, index) => {
+        {skus.map((sku, index) => {
           return (
             <div key={index} className="Amount--item">
-              <p>{item.amount}</p>
+              <p>{sku.stock}</p>
 
               <div>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -38,7 +43,7 @@ export default function Amount() {
                     fill="#809CAB"
                     stroke="#fff"
                     strokeWidth="1.2"
-                  ></circle>
+                  />
                   <text
                     x="50%"
                     y="50%"
@@ -47,7 +52,7 @@ export default function Amount() {
                     fill="#ffffff"
                     fontSize="16"
                   >
-                    {item.size}
+                    {sku.size}
                   </text>
                 </svg>
               </div>
@@ -60,7 +65,7 @@ export default function Amount() {
         />
         <div className="Amount--pack">
           <span>PACK</span>
-          <div>{all.reduce((a, b) => a + b.amount, 0)}</div>
+          <div>{skus.reduce((a, b) => a + b.stock, 0)}</div>
         </div>
       </div>
     </div>

@@ -5,6 +5,13 @@ async function FindAll() {
   try {
     const result = await prismaClient.product.findMany({
       where: { deleted: false },
+      include: {
+        colors: true,
+        images: true,
+        skus: true,
+        company: true,
+        brandRelation: true,
+      },
     });
 
     return {
@@ -27,6 +34,13 @@ async function FindUnique(id: number) {
       where: {
         id: id,
         deleted: false,
+      },
+      include: {
+        colors: true,
+        images: true,
+        skus: true,
+        company: true,
+        brandRelation: true,
       },
     });
 

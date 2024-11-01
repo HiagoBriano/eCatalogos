@@ -1,6 +1,6 @@
 export interface CreateSkuDTO {
   size: string;
-  stock: bigint;
+  stock: number;
   productId: number;
   minQuantity: number;
   openGrid: boolean;
@@ -9,7 +9,7 @@ export interface CreateSkuDTO {
 
 export interface UpdateSkuDTO {
   size?: string;
-  stock?: bigint;
+  stock?: number;
   productId?: number;
   minQuantity?: number;
   openGrid?: boolean;

@@ -1,21 +1,14 @@
 import React from 'react';
 import './style.css';
+import { IProduct } from '../../service/interface';
 
 interface Props {
-  item: string;
-  reference: string;
-  price: string;
+  product: IProduct;
   isReverse: boolean;
   setReverse: (data: boolean) => void;
 }
 
-export default function Details({
-  item,
-  reference,
-  price,
-  isReverse,
-  setReverse,
-}: Props) {
+export default function Details({ product, isReverse, setReverse }: Props) {
   return (
     <div className="Details--top">
       <div onClick={() => setReverse(!isReverse)} className="Details--button">
@@ -38,15 +31,15 @@ export default function Details({
         </svg>
       </div>
 
-      <p className="sc-bIeMhe QHtja">{item}</p>
+      <p className="sc-bIeMhe QHtja">{product.name}</p>
 
       <p className="sc-loZNoV gscSqx">
-        REF: <span className="sc-jrHiGu jtJlrV">{reference}</span>
+        REF: <span className="sc-jrHiGu jtJlrV">{product.reference}</span>
       </p>
 
       <p className="sc-iXEBes cHHQRc">
         <span style={{ fontSize: '10px' }}>R$</span>{' '}
-        <span className="sc-dFxqPF hsCNIb">{price}</span>
+        <span className="sc-dFxqPF hsCNIb">{product.price || '10,00'}</span>
       </p>
     </div>
   );

@@ -2406,6 +2406,7 @@ export default async function ProductsSeed() {
     const data = allData.map((data) => ({
       id: data[0] as number,
       name: data[1] as string,
+      category: data[8] as string,
       reference: data[2] as string,
       gender: data[7] as string,
       promptDelivery: data[10] === 1 ? true : false,

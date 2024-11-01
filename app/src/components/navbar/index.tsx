@@ -1,24 +1,19 @@
 import React from 'react';
 import './style.css';
 
-export default function Navbar() {
-  const [isCategory, setIsCategory] = React.useState(0);
+export interface ICategories_nav {
+  name: string;
+  amount: number;
+}
 
-  const catgories = [
-    {
-      name: 'acessórios',
-      amount: 1,
-    },
-    {
-      name: 'bolsa',
-      amount: 1,
-    },
-    {
-      name: 'sapato',
-      amount: 1,
-    },
-  ];
+interface IProps {
+  category: string;
+  amount: number;
+  next: () => void;
+  previous: () => void;
+}
 
+export default function Navbar({ category, amount, next, previous }: IProps) {
   return (
     <div className="Navbar--top">
       <div>
@@ -36,13 +31,7 @@ export default function Navbar() {
         </svg>
 
         <div className="Navbar--center">
-          <div
-            onClick={() => {
-              if (isCategory !== 0) {
-                setIsCategory(isCategory - 1);
-              }
-            }}
-          >
+          <div onClick={previous}>
             <svg
               stroke="currentColor"
               fill="#FFf"
@@ -57,15 +46,9 @@ export default function Navbar() {
               <path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z"></path>
             </svg>
           </div>
-          <p>{`(${catgories[isCategory].amount}) ${catgories[isCategory].name}`}</p>
+          <p>{`(${amount}) ${category}`}</p>
 
-          <div
-            onClick={() => {
-              if (catgories.length - 1 !== isCategory) {
-                setIsCategory(isCategory + 1);
-              }
-            }}
-          >
+          <div onClick={next}>
             <svg
               stroke="currentColor"
               fill="#FFF"

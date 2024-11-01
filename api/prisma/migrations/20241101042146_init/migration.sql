@@ -89,7 +89,7 @@ CREATE TABLE `companies` (
 CREATE TABLE `skus` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `size` VARCHAR(10) NOT NULL,
-    `stock` BIGINT NOT NULL,
+    `stock` INTEGER NOT NULL,
     `product_id` INTEGER NOT NULL,
     `min_quantity` INTEGER NOT NULL,
     `deleted` BOOLEAN NULL DEFAULT false,

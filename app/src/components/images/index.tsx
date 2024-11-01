@@ -1,12 +1,9 @@
 import React from 'react';
 import './style.css';
+import { IImage } from '../../service/interface';
 
 interface Props {
-  images: {
-    link: string;
-    alt: string;
-    id: number;
-  };
+  images: IImage;
   nextImage: () => void;
   previousImage: () => void;
 }
@@ -22,8 +19,8 @@ export default function Images({ images, nextImage, previousImage }: Props) {
 
       <img
         className="sc-llvwKJ bsvkvi image"
-        alt={images.alt}
-        src={images.link}
+        alt={``}
+        src={`https://api.forca-de-vendas.integrador.backup.e-catalogos.net/images/${images.companyKey}/${images.path}`}
       />
 
       <img

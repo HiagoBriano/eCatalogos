@@ -1,12 +1,9 @@
 import React from 'react';
 import './style.css';
+import { IImage } from '../../service/interface';
 
 interface Props {
-  images: {
-    link: string;
-    alt: string;
-    id: number;
-  }[];
+  images: IImage[];
   setCurrentImage: (data: number) => void;
 }
 
@@ -22,8 +19,7 @@ export default function Options({ images, setCurrentImage }: Props) {
           <img
             onClick={() => setCurrentImage(index)}
             key={image.id}
-            alt={image.alt}
-            src={image.link}
+            src={`https://api.forca-de-vendas.integrador.backup.e-catalogos.net/images/${image.companyKey}/${image.path}`}
           />
         ))}
       </div>
