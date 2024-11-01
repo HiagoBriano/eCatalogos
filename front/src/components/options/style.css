@@ -1,0 +1,29 @@
+.Options--top {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  align-items: center;
+  padding: 5px 0px;
+  border-top: 3px solid rgb(128, 156, 170);
+}
+
+.Options--top > img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.Options--item {
+  box-sizing: border-box;
+  display: flex;
+  gap: 5px;
+}
+
+.Options--item > img {
+  width: 44px;
+  height: 54px;
+  padding: 1px;
+  border: 1px solid rgb(93, 160, 173);
+  cursor: pointer;
+}

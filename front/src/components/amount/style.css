@@ -1,0 +1,82 @@
+.Amount--top {
+  background-color: #809caa;
+  /* width: 100vw; */
+  height: 66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Amount--top > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 6px;
+}
+
+.Amount--item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0px 10px;
+  border-radius: 5px;
+  width: 37px;
+  height: 25px;
+  background: rgb(255, 255, 255);
+  color: rgb(111, 151, 171);
+  font-family: Roboto;
+  font-size: 2.3vh;
+  margin: 0px 11px;
+  font-style: normal;
+  font-weight: 400;
+  width: 37px;
+  height: 25px;
+}
+
+.Amount--item > div {
+  position: absolute;
+  font-size: 10px;
+  top: -16px;
+  right: -9px;
+}
+
+.Amount--pack {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  position: relative;
+}
+
+.Amount--pack > span {
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-family: Roboto;
+  font-size: 1.1vh;
+  font-style: normal;
+  font-weight: 400;
+  position: absolute;
+  top: -14px;
+  left: 23px;
+  transform: translateX(-30%);
+}
+
+.Amount--pack > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0px 10px;
+  border-radius: 5px;
+  width: 37px;
+  height: 25px;
+  background: rgb(255, 255, 255);
+  color: rgb(111, 151, 171);
+  font-family: Roboto;
+  font-size: 2.3vh;
+  margin: 0px 11px;
+  font-style: normal;
+  font-weight: 400;
+  width: 37px;
+  height: 25px;
+}
