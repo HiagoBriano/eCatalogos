@@ -1,6 +1,7 @@
+import { IProduct } from '../../service/interface';
+import { FormatPrice } from '../../App';
 import React from 'react';
 import './style.css';
-import { IProduct } from '../../service/interface';
 
 interface Props {
   product: IProduct;
@@ -39,7 +40,9 @@ export default function Details({ product, isReverse, setReverse }: Props) {
 
       <p className="sc-iXEBes cHHQRc">
         <span style={{ fontSize: '10px' }}>R$</span>{' '}
-        <span className="sc-dFxqPF hsCNIb">{product.price || '10,00'}</span>
+        <span className="sc-dFxqPF hsCNIb">
+          {product.price ? FormatPrice(product.price) : '10,00'}
+        </span>
       </p>
     </div>
   );
