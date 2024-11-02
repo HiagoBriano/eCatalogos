@@ -313,7 +313,13 @@ function App() {
                 isDataCategoris[isNamesCategories[isCurrentCategory]][
                   isCurrentProduct
                 ].id
-              ].amount
+              ]
+                ? isAmount[
+                    isDataCategoris[isNamesCategories[isCurrentCategory]][
+                      isCurrentProduct
+                    ].id
+                  ].amount
+                : null
             }
           />
           <Amount
