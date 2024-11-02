@@ -324,7 +324,7 @@ function App() {
         previousImage={previousProduct}
       />
 
-      <div className={`Under`}>
+      <div className={`Under ${isOpenInfo || isOpenSearch ? 'Under-off' : ''}`}>
         <Options
           images={
             isDataCategoris[isNamesCategories[isCurrentCategory]][
