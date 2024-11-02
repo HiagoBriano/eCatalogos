@@ -18,7 +18,6 @@ export default function Images({ images, nextImage, previousImage }: Props) {
       />
 
       <img
-        className="sc-llvwKJ bsvkvi image"
         alt={``}
         src={`https://api.forca-de-vendas.integrador.backup.e-catalogos.net/images/${images.companyKey}/${images.path}`}
       />

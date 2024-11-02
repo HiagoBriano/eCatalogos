@@ -19,7 +19,6 @@ export default function Details({ product, isReverse, setReverse }: Props) {
           strokeWidth="0"
           viewBox="0 0 20 20"
           aria-hidden="true"
-          className="sc-jEZPox dpfVlH"
           height="1em"
           width="1em"
           xmlns="http://www.w3.org/2000/svg"
@@ -32,17 +31,15 @@ export default function Details({ product, isReverse, setReverse }: Props) {
         </svg>
       </div>
 
-      <p className="sc-bIeMhe QHtja">{product.name}</p>
+      <p>{product.name}</p>
 
-      <p className="sc-loZNoV gscSqx">
-        REF: <span className="sc-jrHiGu jtJlrV">{product.reference}</span>
+      <p>
+        REF: <span>{product.reference}</span>
       </p>
 
-      <p className="sc-iXEBes cHHQRc">
+      <p>
         <span style={{ fontSize: '10px' }}>R$</span>{' '}
-        <span className="sc-dFxqPF hsCNIb">
-          {product.price ? FormatPrice(product.price) : '10,00'}
-        </span>
+        <span>{product.price ? FormatPrice(product.price) : '10,00'}</span>
       </p>
     </div>
   );
