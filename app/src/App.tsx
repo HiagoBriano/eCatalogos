@@ -9,6 +9,7 @@ import Amount from './components/amount';
 import Images from './components/images';
 import Product from './service/product';
 import Price from './components/price';
+import Info from './components/info';
 import './App.css';
 
 interface ICategories {
@@ -43,6 +44,8 @@ function App() {
 
   const [isPriceTotal, setPriceTotal] = React.useState(0);
   const [isPriceCurrentTotal, setPriceCurrentTotal] = React.useState(0);
+
+  const [isOpenInfo, setOpenInfo] = React.useState(false);
 
   const validData = (product: IProduct) => {
     if (!product || product.images.length < 1) {
@@ -251,6 +254,36 @@ function App() {
   return (
     <div className="App">
       <ToastContainer />
+      {isOpenInfo && (
+        <Info
+          close={setOpenInfo}
+          name={
+            isDataCategoris[isNamesCategories[isCurrentCategory]][
+              isCurrentProduct
+            ].name || ''
+          }
+          reference={
+            isDataCategoris[isNamesCategories[isCurrentCategory]][
+              isCurrentProduct
+            ].reference || ''
+          }
+          brand={
+            isDataCategoris[isNamesCategories[isCurrentCategory]][
+              isCurrentProduct
+            ].brand || ''
+          }
+          category={
+            isDataCategoris[isNamesCategories[isCurrentCategory]][
+              isCurrentProduct
+            ].category || ''
+          }
+          gender={
+            isDataCategoris[isNamesCategories[isCurrentCategory]][
+              isCurrentProduct
+            ].gender || ''
+          }
+        />
+      )}
 
       <Navbar
         next={nextCategory}
@@ -277,6 +310,7 @@ function App() {
             ].images
           }
           setCurrentImage={setCurrentImage}
+          openInfo={setOpenInfo}
         />
 
         <span

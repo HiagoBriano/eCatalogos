@@ -1,6 +1,6 @@
+import { IImage } from '../../service/interface';
 import React from 'react';
 import './style.css';
-import { IImage } from '../../service/interface';
 
 interface Props {
   images: IImage;

@@ -1,0 +1,112 @@
+.Info--top {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 0;
+}
+
+.Info--top > div {
+  z-index: 1;
+  width: 90%;
+  max-width: calc(384px);
+  margin: 7svh auto;
+  height: 100%;
+  max-height: 65svh;
+  position: relative;
+}
+
+.Info--title {
+  position: relative;
+  padding: 8px 20px;
+  border-radius: 3px 3px 0px 0px;
+  background: rgb(128, 156, 170);
+}
+
+.Info--title > div {
+  cursor: pointer;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+.Info--title > div > svg {
+  stroke: currentcolor;
+  fill: rgb(255, 255, 255);
+  stroke-width: 0;
+  fill-rule: evenodd;
+  height: 24;
+  width: 24;
+}
+
+.Info--title > h1 {
+  width: 100%;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  margin: auto;
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  padding: 8px 0px;
+}
+
+.Info--data {
+  z-index: 1;
+  background: rgb(255, 255, 255);
+  display: flex;
+  overflow: auto;
+  gap: 0px;
+  height: 100%;
+  align-items: start;
+  flex-direction: column;
+  border-radius: 0px 0px 3px 3px;
+}
+
+.Info--data > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+}
+
+.Info--data-title {
+  color: rgb(0, 0, 0);
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  padding: 8px 12px;
+  text-align: center;
+  margin: 0px auto;
+}
+
+.Info--data-p {
+  color: rgb(0, 0, 0);
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  padding: 8px 12px;
+}
+
+.Info--data-p > span {
+  color: rgb(0, 0, 0);
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.Info--data-background {
+  position: absolute !important;
+  width: 100% !important;
+  height: 100% !important;
+  top: 0px;
+  left: 0px;
+  z-index: 0 !important;
+  background-color: rgba(0, 0, 0, 0.5);
+}
