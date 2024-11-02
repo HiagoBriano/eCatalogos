@@ -27,8 +27,16 @@ function App() {
   const [isNamesCategories, setNamesCategories] = React.useState<string[]>([]);
   const [isDataCategoris, setDataCategories] = React.useState<ICategories>({});
 
-  const [isDataProduct, setDataProduct] = React.useState<IProduct>();
+  // const [isDataProduct, setDataProduct] = React.useState<IProduct>();
   const [isCurrentProduct, setCurrentProduct] = React.useState(0);
+
+  const validData = (product: IProduct) => {
+    if (!product || product.images.length < 1) {
+      return false;
+    }
+
+    return true;
+  };
 
   const getData = async () => {
     const response = await Product.getAll();
@@ -43,16 +51,16 @@ function App() {
       const categories: ICategories = {};
 
       response.data.forEach((product) => {
-        if (!categories[product.category]) {
-          categories[product.category] = [product];
-        } else {
-          categories[product.category].push(product);
+        if (validData(product)) {
+          if (!categories[product.category]) {
+            categories[product.category] = [product];
+          } else {
+            categories[product.category].push(product);
+          }
         }
       });
 
       const namesCategories = Object.keys(categories);
-
-      setDataProduct(categories[namesCategories[0]][0]);
 
       setDataCategories(categories);
       setNamesCategories(namesCategories);
@@ -65,28 +73,6 @@ function App() {
     getData();
   }, []);
 
-  const nextImage = () => {
-    const currentImage = isCurrentImage;
-
-    if (currentImage < isDataProduct!.images.length - 1) {
-      setCurrentImage(currentImage + 1);
-      return;
-    }
-
-    nextProduct();
-    return;
-  };
-
-  const previousImage = () => {
-    if (isCurrentImage > 0) {
-      setCurrentImage(isCurrentImage - 1);
-      return;
-    }
-
-    previousProduct();
-    return;
-  };
-
   const nextProduct = () => {
     const currentProduct = isCurrentProduct;
 
@@ -95,12 +81,6 @@ function App() {
       isDataCategoris![isNamesCategories[isCurrentCategory]].length - 1
     ) {
       setCurrentProduct(currentProduct + 1);
-
-      setDataProduct(
-        isDataCategoris![isNamesCategories[isCurrentCategory]][
-          currentProduct + 1
-        ],
-      );
 
       setCurrentImage(0);
       return;
@@ -111,53 +91,59 @@ function App() {
   };
 
   const previousProduct = () => {
-    const currentProduct = isCurrentProduct;
-
     if (isCurrentProduct > 0) {
       setCurrentProduct(isCurrentProduct - 1);
-
-      setDataProduct(
-        isDataCategoris![isNamesCategories[isCurrentCategory]][
-          currentProduct - 1
-        ],
-      );
 
       setCurrentImage(0);
       return;
     }
 
-    previousCategory();
+    previousCategory(true);
     return;
   };
 
   const nextCategory = () => {
-    const currentCategory = isCurrentCategory;
-
-    if (currentCategory < isNamesCategories.length - 1) {
-      setCurrentCategory(currentCategory + 1);
-
-      setDataProduct(
-        isDataCategoris![isNamesCategories[currentCategory + 1]][0],
-      );
-
+    if (isCurrentCategory < isNamesCategories.length - 1) {
       setCurrentImage(0);
+      setCurrentProduct(0);
+      setCurrentCategory(isCurrentCategory + 1);
+
       return;
     }
+
+    setCurrentImage(0);
+    setCurrentProduct(0);
+    setCurrentCategory(0);
+
+    return;
   };
 
-  const previousCategory = () => {
-    const currentCategory = isCurrentCategory;
-
+  const previousCategory = (end?: boolean) => {
     if (isCurrentCategory > 0) {
-      setCurrentCategory(isCurrentCategory - 1);
-
-      setDataProduct(
-        isDataCategoris![isNamesCategories[currentCategory - 1]][0],
-      );
+      const next = isCurrentCategory - 1;
 
       setCurrentImage(0);
+
+      if (end === true) {
+        setCurrentProduct(isDataCategoris[isNamesCategories[next]].length - 1);
+      } else {
+        setCurrentProduct(0);
+      }
+
+      setCurrentCategory(next);
+
       return;
     }
+
+    const nextCategory = isNamesCategories.length - 1;
+
+    setCurrentImage(0);
+    setCurrentProduct(
+      isDataCategoris[isNamesCategories[nextCategory]].length - 1,
+    );
+    setCurrentCategory(nextCategory);
+
+    return;
   };
 
   if (isError) {
@@ -185,14 +171,22 @@ function App() {
       />
 
       <Images
-        images={isDataProduct!.images[isCurrentImage]}
-        nextImage={nextImage}
-        previousImage={previousImage}
+        images={
+          isDataCategoris[isNamesCategories[isCurrentCategory]][
+            isCurrentProduct
+          ].images[isCurrentImage]
+        }
+        nextImage={nextProduct}
+        previousImage={previousProduct}
       />
 
       <div className={`Under`}>
         <Options
-          images={isDataProduct!.images}
+          images={
+            isDataCategoris[isNamesCategories[isCurrentCategory]][
+              isCurrentProduct
+            ].images
+          }
           setCurrentImage={setCurrentImage}
         />
 
@@ -210,14 +204,24 @@ function App() {
         <div className="Line" />
 
         <Details
-          product={isDataProduct!}
+          product={
+            isDataCategoris[isNamesCategories[isCurrentCategory]][
+              isCurrentProduct
+            ]
+          }
           isReverse={isReverse}
           setReverse={setReverse}
         />
 
         <div className={`${isReverse && 'Under--reverse'}`}>
           <Price />
-          <Amount skus={isDataProduct!.skus} />
+          <Amount
+            skus={
+              isDataCategoris[isNamesCategories[isCurrentCategory]][
+                isCurrentProduct
+              ].skus
+            }
+          />
         </div>
       </div>
     </div>
