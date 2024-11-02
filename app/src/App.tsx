@@ -11,6 +11,7 @@ import Product from './service/product';
 import Price from './components/price';
 import Info from './components/info';
 import './App.css';
+import Search from './components/search';
 
 interface ICategories {
   [key: string]: IProduct[];
@@ -46,6 +47,7 @@ function App() {
   const [isPriceCurrentTotal, setPriceCurrentTotal] = React.useState(0);
 
   const [isOpenInfo, setOpenInfo] = React.useState(false);
+  const [isOpenSearch, setOpenSearch] = React.useState(false);
 
   const validData = (product: IProduct) => {
     if (!product || product.images.length < 1) {
@@ -238,6 +240,24 @@ function App() {
     return;
   };
 
+  const search = (reference: string) => {
+    let found = false;
+
+    isNamesCategories.forEach((nameCategory, indexCategory) => {
+      isDataCategoris[nameCategory].forEach((product, indexProduct) => {
+        if (product.reference && product.reference === reference) {
+          found = true;
+          setCurrentImage(0);
+          setCurrentCategory(indexCategory);
+          setCurrentProduct(indexProduct);
+          return;
+        }
+      });
+    });
+
+    return found;
+  };
+
   if (isError) {
     return (
       <div>
@@ -285,6 +305,8 @@ function App() {
         />
       )}
 
+      {isOpenSearch && <Search search={search} close={setOpenSearch} />}
+
       <Navbar
         next={nextCategory}
         previous={previousCategory}
@@ -311,6 +333,7 @@ function App() {
           }
           setCurrentImage={setCurrentImage}
           openInfo={setOpenInfo}
+          openSearch={setOpenSearch}
         />
 
         <span
