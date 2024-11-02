@@ -308,6 +308,13 @@ function App() {
             less={less}
             total={isPriceTotal}
             totalCurrent={isPriceCurrentTotal}
+            qtd={
+              isAmount[
+                isDataCategoris[isNamesCategories[isCurrentCategory]][
+                  isCurrentProduct
+                ].id
+              ].amount
+            }
           />
           <Amount
             skus={
